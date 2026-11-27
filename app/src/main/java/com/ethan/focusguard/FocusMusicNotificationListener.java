@@ -14,6 +14,9 @@ public class FocusMusicNotificationListener extends NotificationListenerService 
         Notification notification = sbn.getNotification();
         if (!looksLikeMusic(notification, sbn.getPackageName())) return;
 
+        // Only update if this is an active transport/media notification
+        if (!isActiveMusicNotification(notification)) return;
+
         Bundle extras = notification.extras;
         if (extras == null) return;
         CharSequence titleCs = extras.getCharSequence(Notification.EXTRA_TITLE);
@@ -29,7 +32,11 @@ public class FocusMusicNotificationListener extends NotificationListenerService 
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
-        if (sbn != null && looksLikeMusic(sbn.getNotification(), sbn.getPackageName())) {
+        if (sbn == null) return;
+        Notification notification = sbn.getNotification();
+        if (notification != null
+                && looksLikeMusic(notification, sbn.getPackageName())
+                && isActiveMusicNotification(notification)) {
             FocusManager.clearNowPlaying(this);
         }
     }
@@ -44,7 +51,32 @@ public class FocusMusicNotificationListener extends NotificationListenerService 
                 || pkg.contains("soundcloud")
                 || pkg.contains("deezer")
                 || pkg.contains("tidal")
-                || pkg.contains("podcast");
+                || pkg.contains("podcast")
+                // Metrolist
+                || pkg.contains("metrolist")
+                // ReVanced YouTube and YouTube Morphe
+                || pkg.contains("re_vanced")
+                || pkg.contains("youtube_morphe")
+                || pkg.contains("com.google.android.youtube")
+                // Other YouTube variants
+                || pkg.contains("music.youtube");
+    }
+
+    private boolean isActiveMusicNotification(Notification notification) {
+        if (notification == null) return false;
+
+        boolean mediaCategory = Notification.CATEGORY_TRANSPORT.equals(notification.category);
+        if (!mediaCategory) return false;
+
+        Bundle extras = notification.extras;
+        boolean hasMediaSession = extras != null
+                && extras.get(Notification.EXTRA_MEDIA_SESSION) != null;
+        Notification.Action[] actions = notification.actions;
+        boolean hasActions = actions != null && actions.length > 0;
+
+        // A transport category alone is not enough: require a media-session
+        // token or controls so unrelated app notifications are ignored.
+        return hasMediaSession || hasActions;
     }
 
     private String appLabel(String packageName) {

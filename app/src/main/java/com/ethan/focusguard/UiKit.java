@@ -12,33 +12,32 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public final class UiKit {
-    public static final int BG = Color.parseColor("#F5F7FB");
-    public static final int SURFACE = Color.WHITE;
-    public static final int SURFACE_SOFT = Color.parseColor("#EEF3FF");
-    public static final int TEXT = Color.parseColor("#101828");
-    public static final int MUTED = Color.parseColor("#667085");
-    public static final int PRIMARY = Color.parseColor("#2563EB");
-    public static final int PRIMARY_DARK = Color.parseColor("#174EA6");
-    public static final int GREEN = Color.parseColor("#16A34A");
-    public static final int RED = Color.parseColor("#DC2626");
-    public static final int BORDER = Color.parseColor("#D0D5DD");
-
     private UiKit() {}
+
+    public static int color(Activity activity, int resourceId) {
+        return activity.getColor(resourceId);
+    }
 
     public static int dp(Activity activity, int value) {
         return (int) (value * activity.getResources().getDisplayMetrics().density + 0.5f);
     }
 
     public static void page(Activity activity, View root) {
-        root.setBackgroundColor(BG);
+        int background = color(activity, R.color.page_background);
+        boolean dark = (activity.getResources().getConfiguration().uiMode
+                & android.content.res.Configuration.UI_MODE_NIGHT_MASK)
+                == android.content.res.Configuration.UI_MODE_NIGHT_YES;
+        root.setBackgroundColor(background);
         Window window = activity.getWindow();
-        if (Build.VERSION.SDK_INT >= 21) {
-            window.setStatusBarColor(BG);
-            window.setNavigationBarColor(BG);
+        window.setStatusBarColor(background);
+        window.setNavigationBarColor(Build.VERSION.SDK_INT >= 26 || dark
+                ? background : Color.parseColor("#202124"));
+
+        int systemUiVisibility = dark ? 0 : View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        if (Build.VERSION.SDK_INT >= 26 && !dark) {
+            systemUiVisibility |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
         }
-        if (Build.VERSION.SDK_INT >= 23) {
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
+        window.getDecorView().setSystemUiVisibility(systemUiVisibility);
     }
 
     public static GradientDrawable rounded(int color, float radiusDp) {
@@ -70,7 +69,8 @@ public final class UiKit {
         LinearLayout card = new LinearLayout(activity);
         card.setOrientation(LinearLayout.VERTICAL);
         card.setPadding(dp(activity, 18), dp(activity, 18), dp(activity, 18), dp(activity, 18));
-        card.setBackground(roundedStroke(activity, SURFACE, Color.parseColor("#E4E7EC"), 1, 24));
+        card.setBackground(roundedStroke(activity, color(activity, R.color.surface),
+                color(activity, R.color.border), 1, 24));
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -95,7 +95,7 @@ public final class UiKit {
         button.setTextSize(15);
         button.setTypeface(Typeface.DEFAULT_BOLD);
         button.setAllCaps(false);
-        button.setBackground(rounded(PRIMARY, dp(activity, 18)));
+        button.setBackground(rounded(color(activity, R.color.accent), dp(activity, 18)));
         button.setPadding(dp(activity, 14), dp(activity, 12), dp(activity, 14), dp(activity, 12));
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -108,20 +108,22 @@ public final class UiKit {
 
     public static Button secondaryButton(Activity activity, String label) {
         Button button = button(activity, label);
-        button.setTextColor(TEXT);
+        button.setTextColor(color(activity, R.color.text_primary));
         button.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
-        button.setBackground(roundedStroke(activity, SURFACE, BORDER, 1, 18));
+        button.setBackground(roundedStroke(activity, color(activity, R.color.surface),
+                color(activity, R.color.border), 1, 18));
         return button;
     }
 
     public static Button dangerButton(Activity activity, String label) {
         Button button = button(activity, label);
-        button.setBackground(rounded(RED, dp(activity, 18)));
+        button.setBackground(rounded(color(activity, R.color.danger), dp(activity, 18)));
         return button;
     }
 
     public static TextView sectionHeader(Activity activity, String title, String subtitle) {
-        TextView tv = text(activity, title + (subtitle == null || subtitle.isEmpty() ? "" : "\n" + subtitle), 18, TEXT, true);
+        TextView tv = text(activity, title + (subtitle == null || subtitle.isEmpty() ? "" : "\n" + subtitle),
+                18, color(activity, R.color.text_primary), true);
         tv.setPadding(0, 0, 0, dp(activity, 12));
         return tv;
     }

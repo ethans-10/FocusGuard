@@ -57,21 +57,21 @@ public class BlockActivity extends Activity {
         card.setGravity(Gravity.CENTER_HORIZONTAL);
         root.addView(card);
 
-        TextView emoji = UiKit.text(this, "🛡️", 58, UiKit.PRIMARY, false);
+        TextView emoji = UiKit.text(this, "🛡️", 58, UiKit.color(this, R.color.accent), false);
         emoji.setGravity(Gravity.CENTER_HORIZONTAL);
         card.addView(emoji);
 
-        TextView title = UiKit.text(this, "Focus mode is on", 30, UiKit.TEXT, true);
+        TextView title = UiKit.text(this, "Focus mode is on", 30, UiKit.color(this, R.color.text_primary), true);
         title.setGravity(Gravity.CENTER_HORIZONTAL);
         title.setPadding(0, UiKit.dp(this, 16), 0, UiKit.dp(this, 8));
         card.addView(title);
 
-        TextView message = UiKit.text(this, "This app is blocked right now. Go back to the thing you said mattered.", 18, UiKit.MUTED, false);
+        TextView message = UiKit.text(this, "This app is blocked right now. Go back to the thing you said mattered.", 18, UiKit.color(this, R.color.text_secondary), false);
         message.setGravity(Gravity.CENTER_HORIZONTAL);
         message.setPadding(0, 0, 0, UiKit.dp(this, 22));
         card.addView(message);
 
-        status = UiKit.text(this, "", 18, UiKit.GREEN, true);
+        status = UiKit.text(this, "", 18, UiKit.color(this, R.color.success), true);
         status.setGravity(Gravity.CENTER_HORIZONTAL);
         status.setPadding(0, 0, 0, UiKit.dp(this, 26));
         card.addView(status);

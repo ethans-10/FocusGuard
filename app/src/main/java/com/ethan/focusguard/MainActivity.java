@@ -86,22 +86,22 @@ public class MainActivity extends Activity {
         UiKit.page(this, scrollView);
 
         LinearLayout hero = UiKit.card(this);
-        hero.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE_SOFT, UiKit.PRIMARY, 1, 28));
+        hero.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface_soft), UiKit.color(this, R.color.accent), 1, 28));
         root.addView(hero);
 
-        TextView appLabel = UiKit.text(this, "FocusGuard", 15, UiKit.PRIMARY_DARK, true);
+        TextView appLabel = UiKit.text(this, "FocusGuard", 15, UiKit.color(this, R.color.accent_text), true);
         appLabel.setGravity(Gravity.CENTER_HORIZONTAL);
         hero.addView(appLabel);
 
-        TextView title = UiKit.text(this, "Ready to focus?", 30, UiKit.TEXT, true);
+        TextView title = UiKit.text(this, "Ready to focus?", 30, UiKit.color(this, R.color.text_primary), true);
         title.setGravity(Gravity.CENTER_HORIZONTAL);
         title.setPadding(0, UiKit.dp(this, 8), 0, UiKit.dp(this, 6));
         hero.addView(title);
 
-        statusText = UiKit.text(this, "", 18, UiKit.TEXT, true);
+        statusText = UiKit.text(this, "", 18, UiKit.color(this, R.color.text_primary), true);
         statusText.setGravity(Gravity.CENTER);
         statusText.setPadding(UiKit.dp(this, 14), UiKit.dp(this, 10), UiKit.dp(this, 14), UiKit.dp(this, 10));
-        statusText.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE, UiKit.BORDER, 1, 18));
+        statusText.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface), UiKit.color(this, R.color.border), 1, 18));
         hero.addView(statusText);
         UiKit.topMargin(this, statusText, 10);
 
@@ -141,7 +141,7 @@ public class MainActivity extends Activity {
         minutesInput.setSingleLine(true);
         minutesInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         minutesInput.setPadding(UiKit.dp(this, 16), UiKit.dp(this, 12), UiKit.dp(this, 16), UiKit.dp(this, 12));
-        minutesInput.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE, UiKit.BORDER, 1, 16));
+        minutesInput.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface), UiKit.color(this, R.color.border), 1, 16));
         card.addView(minutesInput);
         UiKit.topMargin(this, minutesInput, 10);
 
@@ -184,14 +184,14 @@ public class MainActivity extends Activity {
         scheduleEnabled = new CheckBox(this);
         scheduleEnabled.setText("Use daily schedule");
         scheduleEnabled.setTextSize(16);
-        scheduleEnabled.setTextColor(UiKit.TEXT);
+        scheduleEnabled.setTextColor(UiKit.color(this, R.color.text_primary));
         scheduleEnabled.setChecked(FocusManager.isScheduleEnabled(this));
         card.addView(scheduleEnabled);
 
-        scheduleBadge = UiKit.text(this, "", 15, UiKit.PRIMARY_DARK, true);
+        scheduleBadge = UiKit.text(this, "", 15, UiKit.color(this, R.color.accent_text), true);
         scheduleBadge.setGravity(Gravity.CENTER);
         scheduleBadge.setPadding(UiKit.dp(this, 12), UiKit.dp(this, 9), UiKit.dp(this, 12), UiKit.dp(this, 9));
-        scheduleBadge.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE_SOFT, UiKit.PRIMARY, 1, 18));
+        scheduleBadge.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface_soft), UiKit.color(this, R.color.accent), 1, 18));
         card.addView(scheduleBadge);
         UiKit.topMargin(this, scheduleBadge, 8);
 
@@ -220,7 +220,7 @@ public class MainActivity extends Activity {
         CheckBox autoCharge = new CheckBox(this);
         autoCharge.setText("Open when charging");
         autoCharge.setTextSize(16);
-        autoCharge.setTextColor(UiKit.TEXT);
+        autoCharge.setTextColor(UiKit.color(this, R.color.text_primary));
         autoCharge.setChecked(FocusManager.isAutoStandbyOnCharge(this));
         autoCharge.setOnCheckedChangeListener((buttonView, isChecked) -> FocusManager.setAutoStandbyOnCharge(this, isChecked));
         card.addView(autoCharge);
@@ -228,7 +228,7 @@ public class MainActivity extends Activity {
         CheckBox autoIdle = new CheckBox(this);
         autoIdle.setText("Open when idle");
         autoIdle.setTextSize(16);
-        autoIdle.setTextColor(UiKit.TEXT);
+        autoIdle.setTextColor(UiKit.color(this, R.color.text_primary));
         autoIdle.setChecked(FocusManager.isAutoStandbyOnIdle(this));
         autoIdle.setOnCheckedChangeListener((buttonView, isChecked) -> FocusManager.setAutoStandbyOnIdle(this, isChecked));
         card.addView(autoIdle);
@@ -240,7 +240,7 @@ public class MainActivity extends Activity {
         weatherCityInput.setSingleLine(true);
         weatherCityInput.setInputType(InputType.TYPE_CLASS_TEXT);
         weatherCityInput.setPadding(UiKit.dp(this, 16), UiKit.dp(this, 12), UiKit.dp(this, 16), UiKit.dp(this, 12));
-        weatherCityInput.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE, UiKit.BORDER, 1, 16));
+        weatherCityInput.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface), UiKit.color(this, R.color.border), 1, 16));
         card.addView(weatherCityInput);
         UiKit.topMargin(this, weatherCityInput, 10);
 
@@ -301,7 +301,7 @@ public class MainActivity extends Activity {
         minutesInput.setSingleLine(true);
         minutesInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         minutesInput.setPadding(UiKit.dp(this, 16), UiKit.dp(this, 12), UiKit.dp(this, 16), UiKit.dp(this, 12));
-        minutesInput.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE, UiKit.BORDER, 1, 16));
+        minutesInput.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface), UiKit.color(this, R.color.border), 1, 16));
         card.addView(minutesInput);
         UiKit.topMargin(this, minutesInput, 10);
 
@@ -326,18 +326,18 @@ public class MainActivity extends Activity {
         scheduleEnabled = new CheckBox(this);
         scheduleEnabled.setText("Use daily schedule");
         scheduleEnabled.setTextSize(17);
-        scheduleEnabled.setTextColor(UiKit.TEXT);
+        scheduleEnabled.setTextColor(UiKit.color(this, R.color.text_primary));
         scheduleEnabled.setChecked(FocusManager.isScheduleEnabled(this));
         card.addView(scheduleEnabled);
 
-        scheduleBadge = UiKit.text(this, "", 16, UiKit.PRIMARY_DARK, true);
+        scheduleBadge = UiKit.text(this, "", 16, UiKit.color(this, R.color.accent_text), true);
         scheduleBadge.setPadding(UiKit.dp(this, 14), UiKit.dp(this, 10), UiKit.dp(this, 14), UiKit.dp(this, 10));
         scheduleBadge.setGravity(Gravity.CENTER);
-        scheduleBadge.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE_SOFT, UiKit.PRIMARY, 1, 18));
+        scheduleBadge.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface_soft), UiKit.color(this, R.color.accent), 1, 18));
         card.addView(scheduleBadge);
         UiKit.topMargin(this, scheduleBadge, 8);
 
-        scheduleText = UiKit.text(this, "", 15, UiKit.MUTED, false);
+        scheduleText = UiKit.text(this, "", 15, UiKit.color(this, R.color.text_secondary), false);
         scheduleText.setPadding(0, UiKit.dp(this, 10), 0, UiKit.dp(this, 10));
         card.addView(scheduleText);
 
@@ -363,7 +363,7 @@ public class MainActivity extends Activity {
         LinearLayout card = UiKit.card(this);
         card.addView(UiKit.sectionHeader(this, "Blocked apps", "Pick the apps FocusGuard should block during focus mode"));
 
-        TextView note = UiKit.text(this, "The block screen appears only when your timer or schedule is active.", 15, UiKit.MUTED, false);
+        TextView note = UiKit.text(this, "The block screen appears only when your timer or schedule is active.", 15, UiKit.color(this, R.color.text_secondary), false);
         note.setPadding(0, 0, 0, UiKit.dp(this, 8));
         card.addView(note);
 
@@ -377,14 +377,14 @@ public class MainActivity extends Activity {
         LinearLayout card = UiKit.card(this);
         card.addView(UiKit.sectionHeader(this, "Now Bar and live notification", "Samsung decides if a third-party app is shown in Now Bar"));
 
-        liveStatusText = UiKit.text(this, "", 15, UiKit.TEXT, true);
+        liveStatusText = UiKit.text(this, "", 15, UiKit.color(this, R.color.text_primary), true);
         liveStatusText.setPadding(0, 0, 0, UiKit.dp(this, 10));
         card.addView(liveStatusText);
 
         TextView liveInfo = UiKit.text(this,
                 "FocusGuard now sends a proper ongoing countdown notification. It can show in the status bar and lock screen, but Now Bar only appears on supported One UI versions/settings.",
                 15,
-                UiKit.MUTED,
+                UiKit.color(this, R.color.text_secondary),
                 false);
         liveInfo.setPadding(0, 0, 0, UiKit.dp(this, 10));
         card.addView(liveInfo);
@@ -414,13 +414,13 @@ public class MainActivity extends Activity {
 
         TextView info = UiKit.text(this,
                 "Battery percentage works automatically. Weather uses the city below. Music uses Android notification access so it can read the media notification title from apps like Spotify.",
-                15, UiKit.MUTED, false);
+                15, UiKit.color(this, R.color.text_secondary), false);
         info.setPadding(0, 0, 0, UiKit.dp(this, 10));
         card.addView(info);
 
-        weatherStatusText = UiKit.text(this, FocusManager.getWeatherSummary(this), 15, UiKit.TEXT, true);
+        weatherStatusText = UiKit.text(this, FocusManager.getWeatherSummary(this), 15, UiKit.color(this, R.color.text_primary), true);
         weatherStatusText.setPadding(UiKit.dp(this, 14), UiKit.dp(this, 10), UiKit.dp(this, 14), UiKit.dp(this, 10));
-        weatherStatusText.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE_SOFT, UiKit.PRIMARY, 1, 18));
+        weatherStatusText.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface_soft), UiKit.color(this, R.color.accent), 1, 18));
         card.addView(weatherStatusText);
 
         weatherCityInput = new EditText(this);
@@ -430,7 +430,7 @@ public class MainActivity extends Activity {
         weatherCityInput.setSingleLine(true);
         weatherCityInput.setInputType(InputType.TYPE_CLASS_TEXT);
         weatherCityInput.setPadding(UiKit.dp(this, 16), UiKit.dp(this, 12), UiKit.dp(this, 16), UiKit.dp(this, 12));
-        weatherCityInput.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE, UiKit.BORDER, 1, 16));
+        weatherCityInput.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface), UiKit.color(this, R.color.border), 1, 16));
         card.addView(weatherCityInput);
         UiKit.topMargin(this, weatherCityInput, 10);
 
@@ -445,9 +445,9 @@ public class MainActivity extends Activity {
         });
         card.addView(saveWeather);
 
-        musicStatusText = UiKit.text(this, FocusManager.getNowPlayingSummary(this), 15, UiKit.TEXT, true);
+        musicStatusText = UiKit.text(this, FocusManager.getNowPlayingSummary(this), 15, UiKit.color(this, R.color.text_primary), true);
         musicStatusText.setPadding(UiKit.dp(this, 14), UiKit.dp(this, 10), UiKit.dp(this, 14), UiKit.dp(this, 10));
-        musicStatusText.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE_SOFT, UiKit.PRIMARY, 1, 18));
+        musicStatusText.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface_soft), UiKit.color(this, R.color.accent), 1, 18));
         card.addView(musicStatusText);
         UiKit.topMargin(this, musicStatusText, 10);
 
@@ -457,7 +457,7 @@ public class MainActivity extends Activity {
 
         TextView note = UiKit.text(this,
                 "Music will appear after you enable notification access and start playing something. It only uses the media notification title/artist; it does not read your messages.",
-                14, UiKit.MUTED, false);
+                14, UiKit.color(this, R.color.text_secondary), false);
         note.setPadding(0, UiKit.dp(this, 8), 0, 0);
         card.addView(note);
         return card;
@@ -469,14 +469,14 @@ public class MainActivity extends Activity {
 
         TextView standbyInfo = UiKit.text(this,
                 "The clock now has a separate portrait and landscape layout, visual style cards, exact colour wheel, battery percentage, weather and currently playing music. Auto standby exits when you touch the screen.",
-                15, UiKit.MUTED, false);
+                15, UiKit.color(this, R.color.text_secondary), false);
         standbyInfo.setPadding(0, 0, 0, UiKit.dp(this, 10));
         card.addView(standbyInfo);
 
         CheckBox autoCharge = new CheckBox(this);
         autoCharge.setText("Auto-open standby when charger connects");
         autoCharge.setTextSize(16);
-        autoCharge.setTextColor(UiKit.TEXT);
+        autoCharge.setTextColor(UiKit.color(this, R.color.text_primary));
         autoCharge.setChecked(FocusManager.isAutoStandbyOnCharge(this));
         autoCharge.setOnCheckedChangeListener((buttonView, isChecked) -> FocusManager.setAutoStandbyOnCharge(this, isChecked));
         card.addView(autoCharge);
@@ -484,7 +484,7 @@ public class MainActivity extends Activity {
         CheckBox autoIdle = new CheckBox(this);
         autoIdle.setText("Auto-open after not using the phone");
         autoIdle.setTextSize(16);
-        autoIdle.setTextColor(UiKit.TEXT);
+        autoIdle.setTextColor(UiKit.color(this, R.color.text_primary));
         autoIdle.setChecked(FocusManager.isAutoStandbyOnIdle(this));
         autoIdle.setOnCheckedChangeListener((buttonView, isChecked) -> FocusManager.setAutoStandbyOnIdle(this, isChecked));
         card.addView(autoIdle);
@@ -496,7 +496,7 @@ public class MainActivity extends Activity {
         idleMinutes.setSingleLine(true);
         idleMinutes.setInputType(InputType.TYPE_CLASS_NUMBER);
         idleMinutes.setPadding(UiKit.dp(this, 16), UiKit.dp(this, 12), UiKit.dp(this, 16), UiKit.dp(this, 12));
-        idleMinutes.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE, UiKit.BORDER, 1, 16));
+        idleMinutes.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface), UiKit.color(this, R.color.border), 1, 16));
         card.addView(idleMinutes);
         UiKit.topMargin(this, idleMinutes, 10);
 
@@ -525,7 +525,7 @@ public class MainActivity extends Activity {
 
         TextView autoNote = UiKit.text(this,
                 "Auto idle needs the FocusGuard Accessibility service to be enabled. Some Android/Samsung versions may block automatic opening from the background; the manual clock still works.",
-                14, UiKit.MUTED, false);
+                14, UiKit.color(this, R.color.text_secondary), false);
         autoNote.setPadding(0, UiKit.dp(this, 8), 0, 0);
         card.addView(autoNote);
         return card;
@@ -535,7 +535,7 @@ public class MainActivity extends Activity {
         LinearLayout card = UiKit.card(this);
         card.addView(UiKit.sectionHeader(this, "Required setup", "Accessibility is needed so FocusGuard knows when a blocked app opens"));
 
-        TextView setupInfo = UiKit.text(this, "Android makes you enable this manually. FocusGuard does not read typed text, messages or passwords.", 15, UiKit.MUTED, false);
+        TextView setupInfo = UiKit.text(this, "Android makes you enable this manually. FocusGuard does not read typed text, messages or passwords.", 15, UiKit.color(this, R.color.text_secondary), false);
         setupInfo.setPadding(0, 0, 0, UiKit.dp(this, 10));
         card.addView(setupInfo);
 
@@ -602,7 +602,7 @@ public class MainActivity extends Activity {
     private void refreshStatus() {
         boolean active = FocusManager.isFocusActive(this);
         statusText.setText(FocusManager.statusText(this));
-        statusText.setTextColor(active ? UiKit.GREEN : UiKit.TEXT);
+        statusText.setTextColor(active ? UiKit.color(this, R.color.success) : UiKit.color(this, R.color.text_primary));
 
         if (liveStatusText != null) {
             String permission = FocusNotificationHelper.hasNotificationPermission(this)

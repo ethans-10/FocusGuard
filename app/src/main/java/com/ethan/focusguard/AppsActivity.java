@@ -34,19 +34,19 @@ public class AppsActivity extends Activity {
         scrollView.addView(root);
         UiKit.page(this, scrollView);
 
-        TextView title = UiKit.text(this, "Choose blocked apps", 30, UiKit.TEXT, true);
+        TextView title = UiKit.text(this, "Choose blocked apps", 30, UiKit.color(this, R.color.text_primary), true);
         title.setGravity(Gravity.CENTER_HORIZONTAL);
         root.addView(title);
 
-        TextView note = UiKit.text(this, "Tick distracting apps. They are only blocked while a timer or daily schedule is active.", 16, UiKit.MUTED, false);
+        TextView note = UiKit.text(this, "Tick distracting apps. They are only blocked while a timer or daily schedule is active.", 16, UiKit.color(this, R.color.text_secondary), false);
         note.setGravity(Gravity.CENTER_HORIZONTAL);
         note.setPadding(0, UiKit.dp(this, 10), 0, UiKit.dp(this, 16));
         root.addView(note);
 
-        countText = UiKit.text(this, "", 15, UiKit.PRIMARY_DARK, true);
+        countText = UiKit.text(this, "", 15, UiKit.color(this, R.color.accent_text), true);
         countText.setGravity(Gravity.CENTER);
         countText.setPadding(UiKit.dp(this, 14), UiKit.dp(this, 10), UiKit.dp(this, 14), UiKit.dp(this, 10));
-        countText.setBackground(UiKit.roundedStroke(this, UiKit.SURFACE_SOFT, UiKit.PRIMARY, 1, 18));
+        countText.setBackground(UiKit.roundedStroke(this, UiKit.color(this, R.color.surface_soft), UiKit.color(this, R.color.accent), 1, 18));
         root.addView(countText);
 
         LinearLayout listCard = UiKit.card(this);
@@ -60,7 +60,7 @@ public class AppsActivity extends Activity {
             CheckBox cb = new CheckBox(this);
             cb.setText(app.label + "\n" + app.packageName);
             cb.setTextSize(16);
-            cb.setTextColor(UiKit.TEXT);
+            cb.setTextColor(UiKit.color(this, R.color.text_primary));
             cb.setPadding(0, UiKit.dp(this, 10), 0, UiKit.dp(this, 10));
             cb.setChecked(blocked.contains(app.packageName));
             cb.setOnCheckedChangeListener((buttonView, isChecked) -> {

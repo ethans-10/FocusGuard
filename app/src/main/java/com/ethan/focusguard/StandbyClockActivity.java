@@ -414,11 +414,11 @@ public class StandbyClockActivity extends Activity {
         tv.setSingleLine(true);
         tv.setMaxLines(1);
         tv.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-        tv.setMarqueeRepeatLimit(-1);
         tv.setHorizontallyScrolling(true);
-        tv.setSelected(true);
-        tv.setFocusable(true);
+        tv.setSelected(true);  // Required for marquee to start without focus
+        tv.setFocusable(false);
         tv.setFocusableInTouchMode(false);
+        tv.setMarqueeRepeatLimit(-1);
     }
 
     private void buildOverlayControls() {
@@ -995,12 +995,12 @@ public class StandbyClockActivity extends Activity {
             }
         }
 
-        musicEyebrow.setText(eyebrow);
-        musicTitle.setText(title);
-        musicArtist.setText(artist);
-        musicMeta.setText(meta);
-        musicTitle.setSelected(true);
-        musicArtist.setSelected(true);
+        // updateLiveInfo() runs every second; avoid resetting the marquee when
+        // the media metadata has not actually changed.
+        if (!TextUtils.equals(musicEyebrow.getText(), eyebrow)) musicEyebrow.setText(eyebrow);
+        if (!TextUtils.equals(musicTitle.getText(), title)) musicTitle.setText(title);
+        if (!TextUtils.equals(musicArtist.getText(), artist)) musicArtist.setText(artist);
+        if (!TextUtils.equals(musicMeta.getText(), meta)) musicMeta.setText(meta);
     }
 
     private void updateMusicButtonState() {

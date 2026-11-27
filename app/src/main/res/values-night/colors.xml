@@ -1,0 +1,12 @@
+<resources>
+    <color name="page_background">#0B1020</color>
+    <color name="surface">#151C2B</color>
+    <color name="surface_soft">#1B2740</color>
+    <color name="text_primary">#F2F4F7</color>
+    <color name="text_secondary">#A7B0C0</color>
+    <color name="accent">#2563EB</color>
+    <color name="accent_text">#8AB4F8</color>
+    <color name="success">#4ADE80</color>
+    <color name="danger">#F87171</color>
+    <color name="border">#344054</color>
+</resources>
